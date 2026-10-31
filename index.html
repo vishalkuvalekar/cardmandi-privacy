@@ -34,17 +34,18 @@
 <body>
 <main>
   <h1>CardMandi Privacy Policy</h1>
-  <p class="meta">Effective 4 October 2026 · Applies to the CardMandi app for Android (<code>com.cardmandi.app</code>)</p>
+  <p class="meta">Effective 1 November 2026 · Applies to the CardMandi app for Android (<code>com.cardmandi.app</code>)</p>
 
-  <p>CardMandi is a collection of traditional Indian card games, published by Vishal Kuvalekar ("we", "us"). This policy explains what information the app handles, why, and who it is shared with. CardMandi has no accounts or servers of its own: your profile, game record and settings are stored only on your phone.</p>
+  <p>CardMandi is a collection of traditional Indian card games, published by Vishal Kuvalekar ("we", "us"). This policy explains what information the app handles, why, and who it is shared with. CardMandi has no accounts: your profile, game record and settings are stored only on your phone. The only server we run is a relay that passes messages between the phones at an online table, and it keeps nothing once the table closes.</p>
 
   <div class="summary">
     <p><strong>In short:</strong></p>
     <ul>
-      <li>We do not sell your data, and we do not run any server that receives it.</li>
+      <li>We do not sell your data. Our only server passes messages between the phones at an online table and keeps nothing after the table closes.</li>
       <li>Ads are served by Google AdMob, which collects device identifiers and similar data to show and measure ads.</li>
       <li>If you leave "Usage data" switched on, anonymous usage statistics are sent to Google Analytics for Firebase. You can switch this off in Settings → Privacy.</li>
       <li>When you play with nearby phones, your display name and game moves go directly to those phones and nowhere else.</li>
+      <li>When you play online, your display name and game moves pass through our relay, hosted by Cloudflare, to the other players at your table.</li>
     </ul>
   </div>
 
@@ -83,7 +84,9 @@
   <h3>Sign-in: Google Play Games (optional)</h3>
   <p>If you choose to sign in with Google Play Games, Google shares your Play Games player name and player ID with the app. We use them only to label your profile on your phone. Playing as a guest requires no sign-in. Google's handling of your Play Games account is covered by the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
 
-  <h2>3. Playing with nearby phones</h2>
+  <h2>3. Playing with other people</h2>
+
+  <h3>Nearby phones</h3>
   <p>To play with people in the same room, CardMandi uses Google Nearby Connections, which works over Bluetooth and Wi-Fi. It sends data directly between the phones at the table and does not use the internet or any server. The data it sends is:</p>
   <ul>
     <li>your display name, so the other players can see who has joined</li>
@@ -91,11 +94,22 @@
   </ul>
   <p>Android asks for the Nearby devices permission (on Android 12 and later) or the Bluetooth and location permissions (on Android 11 and earlier) to make these connections. On older Android versions this is required because Android treats Bluetooth scanning as a location permission. <strong>CardMandi never reads, stores or sends your location.</strong> You can deny these permissions and still play every game on your own against computer players.</p>
 
+  <h3>Online tables</h3>
+  <p>When you choose <em>Play online</em> or <em>Join with code</em>, the phones at the table connect to each other over the internet through a relay that we run on Cloudflare Workers. The relay passes messages between the phones at one table and does nothing else. It does not run the game, and it does not read the messages it passes on. The phone that opens the table is the one that deals and keeps the game. What goes through the relay is:</p>
+  <ul>
+    <li>your display name, so the other players at the table can see who has joined</li>
+    <li>game moves and the state of the table, including your own cards on their way to your phone. Each phone is sent only what its player is allowed to see, so no message contains another player's hidden cards</li>
+    <li>a random six-character table code, and a random token that lets your phone get its seat back if its connection drops</li>
+  </ul>
+  <p>To make the connection, Cloudflare necessarily processes your phone's IP address. Our relay does not log or store IP addresses, and it does not use cookies or analytics. All traffic to the relay is encrypted (HTTPS and secure WebSockets). Cloudflare handles the connection as our hosting provider, under the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy Policy</a>.</p>
+  <p>Messages are held only for as long as needed to deliver them. If your connection drops, messages meant for you are kept until your phone reconnects or your seat is given up (after 90 seconds, or 3 minutes for the player who opened the table). Everything about a table is deleted when the person who opened it closes it, after 30 minutes without activity, and in any case within 12 hours.</p>
+  <p>The table code is visible to anyone you share it with, and anyone who has it can join while there is a free seat.</p>
+
   <h2>4. Notifications</h2>
   <p>If you turn on reminders in Settings, the app schedules them on your phone. No data is sent anywhere to do this, and reminders are off by default.</p>
 
   <h2>5. Sharing an invite</h2>
-  <p>The "invite" button opens Android's share sheet with a link to CardMandi on Google Play. The app does not see who you share it with.</p>
+  <p>The "invite" button opens Android's share sheet with a link to CardMandi on Google Play. <em>Share invite</em> on an online table does the same with the table code and a link to it on cardmandi.party. The app does not see who you share either one with. Opening a table link in a browser shows a page served by our relay. That page sets no cookies and runs no analytics.</p>
 
   <h2>6. Summary of data shared</h2>
   <table>
@@ -104,13 +118,14 @@
       <tr><td>Google (AdMob)</td><td>Advertising ID, IP address, device and app info, ad interactions</td><td>Showing and measuring ads, and preventing fraud</td></tr>
       <tr><td>Google (Firebase Analytics), only if Usage data is on</td><td>App instance ID, device and app info, approximate region, usage events</td><td>Understanding app usage</td></tr>
       <tr><td>Google (Play Games), only if you sign in</td><td>Your Play Games account (handled by Google)</td><td>Sign-in</td></tr>
+      <tr><td>Cloudflare (our hosting provider), only when you play online</td><td>Display name, game moves and table state, table code, IP address</td><td>Passing messages between the phones at an online table</td></tr>
       <tr><td>Players at your table</td><td>Display name, game moves</td><td>Playing together</td></tr>
     </tbody>
   </table>
-  <p>Data sent to Google is encrypted in transit (HTTPS). We do not sell personal information or share it with anyone else, except where required by law.</p>
+  <p>Data sent to Google and to our relay is encrypted in transit (HTTPS). We do not sell personal information or share it with anyone else, except where required by law.</p>
 
   <h2>7. Data retention and deletion</h2>
-  <p>Data stored on your phone stays there until you uninstall the app or clear its data. Firebase Analytics keeps event data for up to 14 months and then deletes it automatically. AdMob data is kept according to Google's own policies. Because the analytics data is not linked to your name or account, we usually cannot pick out an individual's records. If you would like us to try to delete data associated with your device, email us at the address below and we will do what Google's tools allow.</p>
+  <p>Data stored on your phone stays there until you uninstall the app or clear its data. Online table data is deleted when the table closes, and within 12 hours at most (see section 3). Firebase Analytics keeps event data for up to 14 months and then deletes it automatically. AdMob data is kept according to Google's own policies. Because the analytics data is not linked to your name or account, we usually cannot pick out an individual's records. If you would like us to try to delete data associated with your device, email us at the address below and we will do what Google's tools allow.</p>
 
   <h2>8. Children</h2>
   <p>CardMandi is a general-audience game and is not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has provided information through the app, contact us and we will help remove it.</p>
