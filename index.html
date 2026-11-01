@@ -44,7 +44,6 @@
       <li>We do not sell your data. Our only server passes messages between the phones at an online table and keeps nothing after the table closes.</li>
       <li>Ads are served by Google AdMob, which collects device identifiers and similar data to show and measure ads.</li>
       <li>If you leave "Usage data" switched on, anonymous usage statistics are sent to Google Analytics for Firebase. You can switch this off in Settings → Privacy.</li>
-      <li>When you play with nearby phones, your display name and game moves go directly to those phones and nowhere else.</li>
       <li>When you play online, your display name and game moves pass through our relay, hosted by Cloudflare, to the other players at your table.</li>
     </ul>
   </div>
@@ -85,14 +84,6 @@
   <p>If you choose to sign in with Google Play Games, Google shares your Play Games player name and player ID with the app. We use them only to label your profile on your phone. Playing as a guest requires no sign-in. Google's handling of your Play Games account is covered by the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
 
   <h2>3. Playing with other people</h2>
-
-  <h3>Nearby phones</h3>
-  <p>To play with people in the same room, CardMandi uses Google Nearby Connections, which works over Bluetooth and Wi-Fi. It sends data directly between the phones at the table and does not use the internet or any server. The data it sends is:</p>
-  <ul>
-    <li>your display name, so the other players can see who has joined</li>
-    <li>game moves and table state, limited so that no phone receives another player's hidden cards</li>
-  </ul>
-  <p>Android asks for the Nearby devices permission (on Android 12 and later) or the Bluetooth and location permissions (on Android 11 and earlier) to make these connections. On older Android versions this is required because Android treats Bluetooth scanning as a location permission. <strong>CardMandi never reads, stores or sends your location.</strong> You can deny these permissions and still play every game on your own against computer players.</p>
 
   <h3>Online tables</h3>
   <p>When you choose <em>Play online</em> or <em>Join with code</em>, the phones at the table connect to each other over the internet through a relay that we run on Cloudflare Workers. The relay passes messages between the phones at one table and does nothing else. It does not run the game, and it does not read the messages it passes on. The phone that opens the table is the one that deals and keeps the game. What goes through the relay is:</p>
